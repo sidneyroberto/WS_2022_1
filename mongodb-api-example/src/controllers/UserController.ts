@@ -1,5 +1,6 @@
 import { User, UserModel } from '../models/UserModel'
 
+
 export default class UserController {
   async save(user: User): Promise<User> {
     const savedUser = await UserModel.create(user)

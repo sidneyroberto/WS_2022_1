@@ -1,7 +1,15 @@
-import * as express from 'express'
-import * as cors from 'cors'
-import * as logger from 'morgan'
+import express from 'express'
+import cors from 'cors'
+import logger from 'morgan'
+
 import { userRouter } from './routes/users'
+import { connectToMongoDB } from './config/db'
+
+const doDbConnection = async () => {
+  await connectToMongoDB()
+}
+
+doDbConnection()
 
 export const app = express()
 app.use(express.json())

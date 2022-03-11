@@ -1,5 +1,5 @@
 import { Document, Schema, model } from 'mongoose'
-import * as EmailValidator from 'email-validator'
+import EmailValidator from 'email-validator'
 
 export interface User extends Document {
   name: string

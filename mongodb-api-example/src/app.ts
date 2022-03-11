@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import logger from 'morgan'
 
+import { postRouter } from './routes/posts'
 import { userRouter } from './routes/users'
 import { connectToMongoDB } from './config/db'
 
@@ -17,4 +18,5 @@ app.use(cors())
 app.use(logger('dev'))
 
 app.use('/users', userRouter)
+app.use('/posts', postRouter)
 app.get('/', (req, res) => res.send('MongoDB API Example'))

@@ -128,4 +128,24 @@ describe('Posts integrations tests', () => {
           })
       })
   })
+
+  it('Should not return posts of nonexistent user', (done) => {
+    chai
+      .request(app)
+      .get('/posts/usuario@email.com')
+      .end((err, res) => {
+        res.should.have.status(404)
+        done()
+      })
+  })
+
+  it('Should not return posts when given an invalid user e-mail', (done) => {
+    chai
+      .request(app)
+      .get('/posts/usuario.email.com')
+      .end((err, res) => {
+        res.should.have.status(400)
+        done()
+      })
+  })
 })

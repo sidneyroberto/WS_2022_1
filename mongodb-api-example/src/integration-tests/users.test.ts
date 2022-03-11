@@ -15,12 +15,13 @@ const should = chai.should()
 chai.use(chaiHttp)
 
 describe('User integration tests', () => {
-  beforeEach(done => {
+  beforeEach((done) => {
     UserModel.deleteMany({}, () => done())
   })
 
-  it('should save a valid user', done => {
-    chai.request(app)
+  it('should save a valid user', (done) => {
+    chai
+      .request(app)
       .post('/users')
       .send(user)
       .end((err, res) => {
@@ -29,8 +30,9 @@ describe('User integration tests', () => {
       })
   })
 
-  it('should not save an user with an invalid name', done => {
-    chai.request(app)
+  it('should not save an user with an invalid name', (done) => {
+    chai
+      .request(app)
       .post('/users')
       .send(invalidNameUser)
       .end((err, res) => {
@@ -39,8 +41,9 @@ describe('User integration tests', () => {
       })
   })
 
-  it('should not save an user with an invalid e-mail', done => {
-    chai.request(app)
+  it('should not save an user with an invalid e-mail', (done) => {
+    chai
+      .request(app)
       .post('/users')
       .send(invalidEmailUser)
       .end((err, res) => {
@@ -49,8 +52,9 @@ describe('User integration tests', () => {
       })
   })
 
-  it('should not save an user with a future birthday', done => {
-    chai.request(app)
+  it('should not save an user with a future birthday', (done) => {
+    chai
+      .request(app)
       .post('/users')
       .send(invalidBirthdayUser1)
       .end((err, res) => {
@@ -59,8 +63,9 @@ describe('User integration tests', () => {
       })
   })
 
-  it('should not save an user with an invalid birthday format', done => {
-    chai.request(app)
+  it('should not save an user with an invalid birthday format', (done) => {
+    chai
+      .request(app)
       .post('/users')
       .send(invalidBirthdayUser2)
       .end((err, res) => {
@@ -69,15 +74,14 @@ describe('User integration tests', () => {
       })
   })
 
-  it('should return all saved users', done => {
+  it('should return all saved users', (done) => {
     Object.keys(users).forEach(async (key) => {
       const user = users[key]
-      await chai.request(app)
-        .post('/users')
-        .send(user)
+      await chai.request(app).post('/users').send(user)
     })
 
-    chai.request(app)
+    chai
+      .request(app)
       .get('/users')
       .end((err, res) => {
         res.should.have.status(200)

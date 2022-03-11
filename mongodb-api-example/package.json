@@ -13,6 +13,7 @@
     "cors": "^2.8.5",
     "email-validator": "^2.0.4",
     "express": "^4.17.3",
+    "mongodb": "^4.4.1",
     "mongoose": "^6.2.2",
     "morgan": "^1.10.0"
   },
@@ -22,6 +23,7 @@
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/mocha": "^9.1.0",
+    "@types/mongodb": "^4.0.7",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.18",

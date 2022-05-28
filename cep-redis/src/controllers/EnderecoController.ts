@@ -22,37 +22,41 @@ class EnderecoController {
       const endereco: Endereco = JSON.parse(value)
       return endereco
     } else {
-      const response = await this._http.get(`/${sanitizedCEP}/json`)
+      try {
+        const response = await this._http.get(`/${sanitizedCEP}/json`)
 
-      if (response.status == 200) {
-        const { erro } = response.data
+        if (response.status == 200) {
+          const { erro } = response.data
 
-        if (erro) {
-          const endereco: Endereco = {
-            mensagemErro: 'CEP não encontrado',
-            statusErro: 404,
+          if (erro) {
+            const endereco: Endereco = {
+              mensagemErro: 'CEP não encontrado',
+              statusErro: 404,
+            }
+
+            return endereco
           }
 
+          const { cep, logradouro, complemento, bairro, localidade, uf } =
+            response.data
+
+          const endereco: Endereco = Object.assign(
+            {},
+            cep ? { cep } : null,
+            logradouro ? { logradouro } : null,
+            complemento ? { complemento } : null,
+            bairro ? { bairro } : null,
+            localidade ? { localidade } : null,
+            uf ? { uf } : null
+          )
+
+          await clientRedis.set(sanitizedCEP, JSON.stringify(endereco))
+
           return endereco
+        } else {
+          throw new Error()
         }
-
-        const { cep, logradouro, complemento, bairro, localidade, uf } =
-          response.data
-
-        const endereco: Endereco = Object.assign(
-          {},
-          cep ? { cep } : null,
-          logradouro ? { logradouro } : null,
-          complemento ? { complemento } : null,
-          bairro ? { bairro } : null,
-          localidade ? { localidade } : null,
-          uf ? { uf } : null
-        )
-
-        await clientRedis.set(sanitizedCEP, JSON.stringify(endereco))
-
-        return endereco
-      } else {
+      } catch (error) {
         const endereco: Endereco = {
           mensagemErro: 'CEP inválido',
           statusErro: 400,

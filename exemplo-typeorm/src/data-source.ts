@@ -1,7 +1,9 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
+import Cage from './entity/Cage'
 import Species from './entity/Species'
 import Specimen from './entity/Specimen'
+import Zookeeper from './entity/Zookeeper'
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -12,7 +14,7 @@ export const AppDataSource = new DataSource({
   database: 'zoo',
   synchronize: true,
   logging: false,
-  entities: [Species, Specimen],
+  entities: [Species, Specimen, Zookeeper, Cage],
   migrations: [],
   subscribers: [],
 })

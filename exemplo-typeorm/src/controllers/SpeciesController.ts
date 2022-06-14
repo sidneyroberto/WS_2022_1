@@ -18,4 +18,9 @@ export default class SpeciesController {
     const species = await this._repo.find()
     return species
   }
+
+  async findById(id: number) {
+    const species = await this._repo.findOneBy({ id })
+    return species
+  }
 }

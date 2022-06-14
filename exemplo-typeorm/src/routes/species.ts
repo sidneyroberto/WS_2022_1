@@ -28,3 +28,16 @@ speciesRouter.get('/', async (req, res) => {
   const species = await speciesCtrl.findAll()
   return res.json({ species })
 })
+
+speciesRouter.get('/:id', async (req, res) => {
+  const aux = req.params.id
+  const id = parseInt(aux)
+
+  const species = await speciesCtrl.findById(id)
+
+  if (species) {
+    return res.json({ species })
+  }
+
+  return res.status(404).json({ message: 'No species for given id' })
+})

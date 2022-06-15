@@ -9,7 +9,7 @@ export default class Cage {
   @Column()
   area: string
 
-  @ManyToMany(() => Zookeeper)
+  @ManyToMany(() => Zookeeper, { cascade: true })
   @JoinTable()
   zookeepers: Promise<Zookeeper[]>
 }

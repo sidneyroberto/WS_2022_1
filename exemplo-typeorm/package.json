@@ -23,6 +23,7 @@
    "scripts": {
       "start": "ts-node src/server.ts",
       "typeorm": "typeorm-ts-node-commonjs",
-      "dev": "nodemon --exec ts-node src/server.ts"
+      "dev": "nodemon --exec ts-node src/server.ts",
+      "populate": "nodemon --exec ts-node src/populate.ts"
    }
 }

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm'
+import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm'
 import Cage from './Cage'
 
 @Entity()
@@ -12,6 +12,6 @@ export default class Zookeeper {
   @Column()
   birthday: Date
 
-  @ManyToMany(() => Cage)
+  @ManyToMany(() => Cage, { cascade: true })
   cages: Promise<Cage[]>
 }
